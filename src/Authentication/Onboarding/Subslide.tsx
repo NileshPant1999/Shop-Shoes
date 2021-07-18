@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     subtitle: {
-     fontFamily: "SFProText-Semibold",
+     fontFamily: "SemiBold",
      fontSize: 24,
      lineHeight: 30,
      marginBottom: 12,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
      textAlign: 'center'
     },
     description: {
-    fontFamily: "SFProText-Regular",
+    fontFamily: "Regular",
     fontSize: 16,
     lineHeight: 24,
     color: '#0C0D34',

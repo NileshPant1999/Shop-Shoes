@@ -1,23 +1,33 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Onboarding from './src/Authentication/Onboarding/Onboarding';
-import { LoadAssets } from './src/components';
+import { ThemeProvider } from '@shopify/restyle'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { LoadAssets, theme } from './src/components';
 import { StatusBar } from 'react-native';
+import { Routes } from './src/components/Routes';
+import { Welcome, Onboarding, Login, Signup, assets as authenticationAssets } from './src/Authentication';
 
 
 const fonts = {
-  "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
-  "SFProText-Semibold": require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
-  "SFProText-Regular": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+  "Bold": require("./assets/fonts/SFPro-Display-Bold.ttf"),
+  "SemiBold": require("./assets/fonts/SFPro-Display-Semibold.ttf"),
+  "Medium": require("./assets/fonts/SFPro-Display-Medium.ttf"),
+  "Regular": require("./assets/fonts/SFPro-Display-Regular.ttf"),
 };
 
-const AuthencationStack = createStackNavigator()
+const assets =  [ ...authenticationAssets ]
+
+const AuthencationStack = createStackNavigator<Routes>()
 
 const AuthencationNavigator = () => {
   return (
     <AuthencationStack.Navigator headerMode={'none'}>
-       <AuthencationStack.Screen name={"onboarding"} component={Onboarding} />
+       <AuthencationStack.Screen name={"Onboarding"} component={Onboarding} />
+       <AuthencationStack.Screen name={"Welcome"} component={Welcome} />
+       <AuthencationStack.Screen name={"Login"} component={Login} />
+       <AuthencationStack.Screen name={"Signup"} component={Signup} />
     </AuthencationStack.Navigator>
   )
   
@@ -25,10 +35,14 @@ const AuthencationNavigator = () => {
 
 export default function App() {
   return (
-    <LoadAssets {...{ fonts }}>
-      <StatusBar hidden={true} />
-      <AuthencationNavigator />
-    </LoadAssets>
+    <ThemeProvider {...{ theme }} >
+      <LoadAssets {...{ fonts, assets}}>
+        <StatusBar hidden={false} />
+        <SafeAreaProvider>
+            <AuthencationNavigator />
+        </SafeAreaProvider>
+      </LoadAssets>
+    </ThemeProvider>
   );
 }
 

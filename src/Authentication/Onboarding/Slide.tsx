@@ -1,7 +1,8 @@
 import React from 'react'
-import { Image } from 'react-native';
+import { Image, ImageRequireSource } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { View, Text, Dimensions } from 'react-native'
+import { theme } from '../../components/Theme'
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,7 +10,7 @@ export const SLIDE_HEIGHT = 0.61 * height;
 
 const styles = StyleSheet.create({
     container: {
-        width
+        width,
     },
     titleContainer: {
       height: 100,
@@ -18,13 +19,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 80,
         lineHeight: 80,
-        fontFamily: "SFProText-Bold",
+        fontFamily: "Bold",
         color: "white",
         textAlign: 'center',
     },
     underlay: {
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-end',
+
     },
     picture: {
         ...StyleSheet.absoluteFillObject,
@@ -37,7 +39,11 @@ const styles = StyleSheet.create({
 interface SlideProps{
     label: string;
     right?: boolean;
-    picture?: string;
+    picture?: {
+        src: ImageRequireSource,
+        height: number,
+        width: number
+    };
 }
 
 const Slide = ({label, right, picture}: SlideProps) => {
@@ -49,7 +55,12 @@ const Slide = ({label, right, picture}: SlideProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.underlay}>
-                <Image  source = {picture as any} style={styles.picture} />
+                <Image  source = {picture.src} 
+                    style={{
+                        width: width - theme.borderRadii.xl,
+                        height: ((width - theme.borderRadii.xl) * picture.height) / picture.width
+                    }}
+                />
             </View>
             <View style={[styles.titleContainer, { transform }]}>
                 <Text style={styles.title}>{label}</Text>

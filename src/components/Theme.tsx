@@ -20,14 +20,15 @@ export const palette = {
     transparent: "transparent"
 }
 
-const theme = {
+export const theme = {
     colors: {
         primary: palette.green,
         primaryLight: "#E7F9F7",
         secondary: "#0C0D34",
         danger: "#FF0058",
         info: "#808080",
-        // lightGrey: "#FAFAFA",
+        lightGrey: "#FAFAFA",
+        darkGrey: "#8A8D90",
         text: "rgba(12, 13, 52, 0.7)",
         // darkGrey: "#808080",
         background: palette.white,
@@ -110,7 +111,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => (
 )
 
 export type Theme = typeof theme;
-export const Box = createBox<Theme>()
+export const Box = createBox<any>()
 export const Text = createText<Theme>()
 export const useTheme = () => useReTheme<Theme>();
 

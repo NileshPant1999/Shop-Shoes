@@ -5,6 +5,7 @@ import Animated, { multiply }  from 'react-native-reanimated'
 import {interpolateColor, onScrollEvent, useScrollHandler, useValue} from 'react-native-redash'
 import Slide from './Slide'
 import Subslide from './Subslide'
+import { StackNavigationProps, Routes } from '../../components/Routes'
 
 const { width, height } = Dimensions.get("window")
 
@@ -30,49 +31,58 @@ const styles = StyleSheet.create({
     }
 })
 
+const slides = [
+    {
+        label: 'Relaxed',
+        subtitle: 'Find Your Outfit',
+        description: "Confused about your outfit? Don't worry! Find the best outfit here!",
+        color: "#BFEAF5",
+        picture: {
+            src: require("../assets/1.png"),
+            width: 730,
+            height: 1095
+        }                
+    },
+    {
+        label: 'Playful',
+        subtitle: 'Hear it First, Wear it First',
+        description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
+        color: "#BEECC4",
+        picture: {
+            width: 690,
+            height: 1070,
+            src: require("../assets/2.png")
+        }  
+    },
+    {
+        label: 'Original',
+        subtitle: 'Your Style, Your Way',
+        description: 'Create your individual & unique style and look amazing everyday',
+        color: "#FFE4D9",
+        picture:  {
+            src: require("../assets/3.png"),
+            width: 616,
+            height: 898
+        }
+    },
+    {
+        label: 'Funky',
+        subtitle: 'Look Good, Feel Good',
+        description: 'Discover the latest trends in fashion and explore your personality',
+        color: "#FFDDDD",
+        picture: {
+            src: require("../assets/4.png"),
+            width: 730,
+            height: 1095
+        }   
+    }
+]
 
-interface SlideProps{
-    onPress(): void; 
-}
 
-export default function Onboarding() {
 
+const  Onboarding = ({navigation}: StackNavigationProps<Routes, "Onboarding">) => {
     const scroll =  useRef<Animated.ScrollView>(null);
     const {scrollHandler, x} = useScrollHandler();
-
-    const slides = [
-        {
-            label: 'Relaxed',
-            subtitle: 'Find Your Outfit',
-            description: "Confused about your outfit? Don't worry! Find the best outfit here!",
-            color: "#BFEAF5",
-            picture: require("../assets/1.png"),
-                
-        },
-        {
-            label: 'Playful',
-            subtitle: 'Hear it First, Wear it First',
-            description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
-            color: "#BEECC4",
-            picture: require("../assets/2.png"),
-               
-        },
-        {
-            label: 'Original',
-            subtitle: 'Your Style, Your Way',
-            description: 'Create your individual & unique style and look amazing everyday',
-            color: "#FFE4D9",
-            picture:  require("../assets/3.png"),
-        },
-        {
-            label: 'Funky',
-            subtitle: 'Look Good, Feel Good',
-            description: 'Discover the latest trends in fashion and explore your personality',
-            color: "#FFDDDD",
-            picture: require("../assets/4.png"),
-                
-        }
-    ]
 
     const backgroundColor = interpolateColor(x, {
         inputRange: slides.map((_,i) => i*width),
@@ -95,7 +105,7 @@ export default function Onboarding() {
                     {...scrollHandler}
                     >
                         {slides.map(({ label, picture }, index) => (
-                            <Slide key={index} right={!(index % 2)} {...{ label, picture }} />
+                            <Slide key={index} right={!(false)} {...{ label, picture }} />
                         ))}
                 </Animated.ScrollView>
             </Animated.View>
@@ -110,23 +120,27 @@ export default function Onboarding() {
                     transform: [{ translateX: multiply(x, - 1) }]
                 }}
                 >
-                    {slides.map(({ subtitle, description }, index) => (
+                    {slides.map(({ subtitle, description }, index) => {
+                        const last= index === slides.length - 1;
+
+                        return (
                         <Subslide
                             key={index}
                             onPress={() => {
-                                
-                                if (scroll.current){
+                                if (last){
+                                    navigation.navigate('Welcome');
+                                }
+                                 else {
                                     scroll.current
-                                    .getNode()
+                                    ?.getNode()
                                     .scrollTo({x: width * (index+1), animated: true})
                                 }
-                                return null;
                             }}
-                            last={index === (slides.length - 1)} 
-                            {...{ subtitle, description}}
+                            {...{ subtitle, description, last}}
                             
                             />
-                    ))}
+                        )
+                    })}
                 </Animated.View>
             </View>  
         </View>
@@ -134,3 +148,6 @@ export default function Onboarding() {
     )
 }
 
+export const assets = slides.map((slide) => slide.picture.src);
+
+export default Onboarding;

@@ -1,2 +1,2 @@
 
-export { default } from "./Onboarding";
+export { default, assets } from "./Onboarding";
