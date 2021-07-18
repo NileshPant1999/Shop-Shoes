@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     picture: {
         ...StyleSheet.absoluteFillObject,
         width: undefined,
-        height: undefined
+        height: undefined,
+        borderBottomRightRadius: 75
     }
 })
 
@@ -47,7 +48,9 @@ const Slide = ({label, right, picture}: SlideProps) => {
     ]
     return (
         <View style={styles.container}>
-            
+            <View style={styles.underlay}>
+                <Image  source = {picture as any} style={styles.picture} />
+            </View>
             <View style={[styles.titleContainer, { transform }]}>
                 <Text style={styles.title}>{label}</Text>
             </View>

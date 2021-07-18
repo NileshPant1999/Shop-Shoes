@@ -30,7 +30,7 @@ interface SubslideProps {
     description: string,
     subtitle: string,
     last?: boolean,
-    onPress: void
+    onPress: any
 }
 
 const Subslide = ({subtitle, description, last, onPress}: SubslideProps) => {

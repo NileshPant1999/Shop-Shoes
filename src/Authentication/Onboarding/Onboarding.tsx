@@ -25,24 +25,53 @@ const styles = StyleSheet.create({
     },
     footerContent: {
         flex: 1,
-        flexDirection: "row",
         backgroundColor: "white",
         borderTopLeftRadius: BORDER_RADIUS
-
     }
 })
+
+
+interface SlideProps{
+    onPress(): void; 
+}
 
 export default function Onboarding() {
 
     const scroll =  useRef<Animated.ScrollView>(null);
     const {scrollHandler, x} = useScrollHandler();
-    const onScroll = onScrollEvent({x});
 
     const slides = [
-        {label: "Relaxed", subtitle:"Find Your Outfits", description: "Confused about your outfit?Don't worry! Find the best outfit here!", picture: 'https://i.pinimg.com/originals/9c/c3/e7/9cc3e7a352aab4388f37bcb598bebeed.jpg', color: "#BFEAF5"},
-        {label: "Playful", subtitle:"Hear it First, Wear it First", description: "Hates the Shoes in your wardrobe? Explore hundereds of outfits.", picture: 'https://www.acmodasi.in/rate/casting/80682-1531501978-426408.jpg', color: "#BEECC4"},
-        {label: "Excentric", subtitle:"Find Your Outfits", description: "Confused about your outfit?Don't worry! Find the best outfit here!", picture: 'https://castyou-website.sgp1.digitaloceanspaces.com/2019/03/Aishwarya-Sankar.jpg', color: "#FFE4D9"},
-        {label: "Excentric", subtitle:"Hear it First, Wear it First", description: "Hates the Shoes in your wardrobe? Explore hundereds of outfits.", picture: 'https://castyou-website.sgp1.digitaloceanspaces.com/2019/03/Aishwarya-Sankar.jpg', color: "#FFDDDD"},
+        {
+            label: 'Relaxed',
+            subtitle: 'Find Your Outfit',
+            description: "Confused about your outfit? Don't worry! Find the best outfit here!",
+            color: "#BFEAF5",
+            picture: require("../assets/1.png"),
+                
+        },
+        {
+            label: 'Playful',
+            subtitle: 'Hear it First, Wear it First',
+            description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
+            color: "#BEECC4",
+            picture: require("../assets/2.png"),
+               
+        },
+        {
+            label: 'Original',
+            subtitle: 'Your Style, Your Way',
+            description: 'Create your individual & unique style and look amazing everyday',
+            color: "#FFE4D9",
+            picture:  require("../assets/3.png"),
+        },
+        {
+            label: 'Funky',
+            subtitle: 'Look Good, Feel Good',
+            description: 'Discover the latest trends in fashion and explore your personality',
+            color: "#FFDDDD",
+            picture: require("../assets/4.png"),
+                
+        }
     ]
 
     const backgroundColor = interpolateColor(x, {
@@ -54,7 +83,7 @@ export default function Onboarding() {
     return (
         <View style={styles.container}>
             <Animated.View 
-                style={[styles.slider, { backgroundColor: backgroundColor }]}
+                style={[styles.slider, { backgroundColor: backgroundColor as any }]}
                 >
                 <Animated.ScrollView 
                     ref={scroll}
@@ -70,18 +99,28 @@ export default function Onboarding() {
                         ))}
                 </Animated.ScrollView>
             </Animated.View>
-            <Animated.View style={styles.footer}>
-                <View style={{ ...StyleSheet.absoluteFillObject}} />
-                <Animated.View style={[styles.footerContent, {width: width * slides.length, flex: 1, transform: [{translateX: multiply(x, -1)}]}]}>
+            <View style={styles.footer}>
+                <Animated.View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: backgroundColor as any }} />
+                <View style={styles.footerContent}>
+                <Animated.View
+                    style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    width: width * slides.length,
+                    transform: [{ translateX: multiply(x, - 1) }]
+                }}
+                >
                     {slides.map(({ subtitle, description }, index) => (
                         <Subslide
-                            key={index} 
+                            key={index}
                             onPress={() => {
+                                
                                 if (scroll.current){
                                     scroll.current
                                     .getNode()
                                     .scrollTo({x: width * (index+1), animated: true})
                                 }
+                                return null;
                             }}
                             last={index === (slides.length - 1)} 
                             {...{ subtitle, description}}
@@ -89,7 +128,9 @@ export default function Onboarding() {
                             />
                     ))}
                 </Animated.View>
-            </Animated.View>  
+            </View>  
         </View>
+    </View>
     )
 }
+

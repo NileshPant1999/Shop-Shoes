@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Onboarding from './src/Authentication/Onboarding/Onboarding';
 import { LoadAssets } from './src/components';
+import { StatusBar } from 'react-native';
+
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -24,6 +26,7 @@ const AuthencationNavigator = () => {
 export default function App() {
   return (
     <LoadAssets {...{ fonts }}>
+      <StatusBar hidden={true} />
       <AuthencationNavigator />
     </LoadAssets>
   );
