@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, KeyboardAvoidingView, KeyboardAvoidingViewBase } from 'react-native'
 import { Box, theme } from './Theme'
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -20,7 +20,6 @@ const Container = ({children, footer}: ContainerProps) => {
 
     return (
         <Box flex={1} backgroundColor="secondary">
-            <StatusBar barStyle="light-content" />
             <Box backgroundColor="background">
                 <Box borderBottomLeftRadius="xl" overflow="hidden" height={height * 0.61}>
                     <Image 
@@ -51,12 +50,14 @@ const Container = ({children, footer}: ContainerProps) => {
                 >
                     {children}
                 </Box>
+                
             </Box>
             <Box  backgroundColor="secondary">
                     {footer}
                     <Box height={insets.top} />
             </Box>
         </Box>
+
     )
 }
 

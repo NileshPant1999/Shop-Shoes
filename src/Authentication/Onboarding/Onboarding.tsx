@@ -38,7 +38,7 @@ const slides = [
         description: "Confused about your outfit? Don't worry! Find the best outfit here!",
         color: "#BFEAF5",
         picture: {
-            src: require("../assets/1.png"),
+            src: require("../assets/21.png"),
             width: 730,
             height: 1095
         }                
@@ -71,7 +71,7 @@ const slides = [
         description: 'Discover the latest trends in fashion and explore your personality',
         color: "#FFDDDD",
         picture: {
-            src: require("../assets/4.png"),
+            src: require("../assets/26.png"),
             width: 730,
             height: 1095
         }   

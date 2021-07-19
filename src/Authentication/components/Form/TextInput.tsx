@@ -7,7 +7,7 @@ import { Feather as Icon } from "@expo/vector-icons";
 interface TextInputProps {
     placeholder: string;
     icon: string;
-    validator: boolean;
+    validator: any;
 }
 
 const SIZE = theme.borderRadii.m * 2;
@@ -23,7 +23,7 @@ const TextInput = ({icon, validator, ...props }: TextInputProps) => {
     const [state, setState] = useState<InputState>(Pristine);
 
     const validate = () => {
-        const valid = validator;
+        const valid = validator(text);
         setState(valid);
     } 
 
@@ -52,16 +52,25 @@ const TextInput = ({icon, validator, ...props }: TextInputProps) => {
             <Box padding="s">
                <Icon name={icon} size={16} { ... { color }} />
             </Box>
-            <RNTextInput 
-                underlineColorAndroid="tranparent" 
-                placeholderTextColor={color}
-                onBlur={validate}
-                {...{onChangeText}}
-                {...props}
-            />
+            <Box flex={1} >
+                <RNTextInput 
+                    underlineColorAndroid={'transparent'}
+                    placeholderTextColor={color}
+                    onBlur={validate}
+                    {...{onChangeText}}
+                    {...props}
+                />
+            </Box>
+           
             {
                 (state === Valid || state === Invalid) && (
-                    <Box height={SIZE} width={SIZE} borderRadius="m">
+                    <Box 
+                        height={SIZE} 
+                        width={SIZE} 
+                        borderRadius="m" 
+                        justifyContent="center"
+                        alignItems="center"
+                        backgroundColor={state === Valid ? "primary" : "danger"}>
                         <Icon name={state === Valid ? 'check' : "x"} color="white" />
                     </Box>
                 )
