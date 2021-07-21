@@ -14,11 +14,11 @@ const Checkbox = ({ label }: CheckboxProps) => {
 	return (
 		<RectButton
 			onPress={() => setChecked((c) => !c)}
-			style={{ justifyContent: "center" }}
+			style={{ justifyContent: "center", borderRadius: 20 }}
 		>
 			<Box flexDirection="row" alignItems="center">
 				<Box
-					marginRight="m"
+					marginRight="l"
 					height={20}
 					width={20}
 					borderRadius="s"

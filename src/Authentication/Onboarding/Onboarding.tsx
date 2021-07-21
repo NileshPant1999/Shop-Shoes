@@ -150,12 +150,10 @@ const Onboarding = ({
 										if (last) {
 											navigation.navigate("Welcome")
 										} else {
-											scroll.current
-												?.getNode()
-												.scrollTo({
-													x: width * (index + 1),
-													animated: true,
-												})
+											scroll.current?.getNode().scrollTo({
+												x: width * (index + 1),
+												animated: true,
+											})
 										}
 									}}
 									{...{ subtitle, description, last }}
