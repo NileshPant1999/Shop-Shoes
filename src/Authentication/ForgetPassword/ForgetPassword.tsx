@@ -43,8 +43,8 @@ const ForgetPassword = ({
 				<Box alignItems="center" marginTop="m">
 					<Button
 						variant="primary"
-						onPress={() => console.log("hi")}
-						label="Log into your account"
+						onPress={() => navigation.navigate("PasswordChange")}
+						label="Reset Password"
 					/>
 				</Box>
 			</Box>

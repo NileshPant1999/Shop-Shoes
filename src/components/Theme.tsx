@@ -33,6 +33,7 @@ export const theme = {
 		// darkGrey: "#808080",
 		background: palette.white,
 		background2: "#F4F0EF",
+		black: "black",
 
 		graph1: palette.orange,
 		graph2: palette.yellow,
@@ -40,6 +41,7 @@ export const theme = {
 		drawer2: palette.yellow,
 		drawer3: palette.pink,
 		drawer4: palette.violet,
+		lightblue: palette.lightblue,
 	},
 	spacing: {
 		o: 0,

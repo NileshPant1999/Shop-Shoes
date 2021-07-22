@@ -15,6 +15,7 @@ import {
 	ForgetPassword,
 	assets as authenticationAssets,
 } from "./src/Authentication"
+import PasswordChange from "./src/Authentication/components/PasswordChange"
 
 const fonts = {
 	Bold: require("./assets/fonts/SFPro-Display-Bold.ttf"),
@@ -40,6 +41,10 @@ const AuthencationNavigator = () => {
 			<AuthencationStack.Screen
 				name={"ForgetPassword"}
 				component={ForgetPassword}
+			/>
+			<AuthencationStack.Screen
+				name={"PasswordChange"}
+				component={PasswordChange}
 			/>
 		</AuthencationStack.Navigator>
 	)
