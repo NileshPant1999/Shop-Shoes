@@ -3,10 +3,11 @@ import { StyleSheet, Text, View } from "react-native"
 import { TextInput as RNTextInput } from "react-native"
 import { Box, theme } from "../../../components/Theme"
 import { Feather as Icon } from "@expo/vector-icons"
+import RoundedIcon from "../../../components/RoundedIcon"
 
 interface TextInputProps {
 	placeholder: string
-	icon: string
+	icon: any
 	validator: any
 	secureTextEntry?: boolean
 }
@@ -70,20 +71,12 @@ const TextInput = ({
 			</Box>
 
 			{(state === Valid || state === Invalid) && (
-				<Box
-					height={SIZE}
-					width={SIZE}
-					borderRadius="m"
-					justifyContent="center"
-					alignItems="center"
+				<RoundedIcon
+					name={state === Valid ? "check" : "x"}
+					size={SIZE}
+					color="white"
 					backgroundColor={state === Valid ? "primary" : "danger"}
-					style={{ borderRadius: SIZE / 2 }}
-				>
-					<Icon
-						name={state === Valid ? "check" : "x"}
-						color="white"
-					/>
-				</Box>
+				/>
 			)}
 		</Box>
 	)
