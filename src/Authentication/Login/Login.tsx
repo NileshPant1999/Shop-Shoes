@@ -69,7 +69,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
 				<Box alignItems="center" marginTop="m">
 					<Button
 						variant="primary"
-						onPress={() => console.log("hi")}
+						onPress={() => navigation.navigate('Home')}
 						label="Log into your account"
 					/>
 				</Box>
